@@ -1,0 +1,84 @@
+.parte-container {
+  position: absolute;
+  right: 0;
+  top: auto;
+  z-index: 12;
+}
+.btn.btn-app.parte-btn {
+  float: left;
+  display: block;
+  text-align: center;
+  border-radius: 6px 0 0 6px;
+  opacity: 0.55;
+  vertical-align: top;
+  margin: 0;
+}
+.btn.btn-app.parte-btn:hover,
+.btn.btn-app.parte-btn.open {
+  opacity: 1;
+}
+.btn.btn-app.parte-btn.btn-xs {
+  width: 42px;
+}
+.parte-box {
+  display: block;
+  float: left;
+  max-width: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0;
+  -moz-transform: translate(0,0);
+  -webkit-transform: translate(0,0);
+  -o-transform: translate(0,0);
+  -ms-transform: translate(0,0);
+  transform: translate(0,0);
+  background-color: #FFF;
+  border: 0 solid #ffb34b;
+  -webkit-transition: max-width 0.25s linear 0s, max-height 0s linear 0.25s, padding 0s linear 0.25s, border-width 0s linear 0.25s;
+  -o-transition: max-width 0.25s linear 0s, max-height 0s linear 0.25s, padding 0s linear 0.25s, border-width 0s linear 0.25s;
+  transition: max-width 0.25s linear 0s, max-height 0s linear 0.25s, padding 0s linear 0.25s, border-width 0s linear 0.25s;
+}
+.parte-box.open {
+  max-width: 320px;
+  max-height: 1000px;
+  padding: 0 14px;
+  border-width: 2px;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+.parte-box.open .parte-item {
+  z-index: auto;
+  min-width: 140px;
+}
+.parte-box .parte-item {
+  margin: 6px 0;
+  color: #444;
+  max-height: 24px;
+  position: relative;
+  z-index: -1;
+  white-space: nowrap;
+}
+.parte-box .parte-item > label.lbl {
+  font-size: 13px;
+}
+@media (max-width: 480px) {
+  .parte-container {
+    text-align: right;
+  }
+  .parte-box {
+    float: none !important;
+    text-align: left;
+  }
+  .btn.parte-btn {
+    float: none !important;
+    display: inline-block;
+  }
+}
+@media (max-width: 320px) {
+  .parte-box > .clearfix > .pull-left,
+  .parte-box > .clearfix > .pull-right {
+    float: none !important;
+  }
+}
