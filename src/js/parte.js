@@ -1,11 +1,10 @@
 (function ($) {
     var itemTemplate = '<div class="parte-item" > </div>';
     var itemTemplateLabel = '<label class="lbl" for=""></label>';
-    var itemTemplateCheckBox = '<input type="checkbox"  autocomplete="off" />';
+    var itemTemplateCheckBox = '<input type="checkbox"   />';
 
     var box = '<div id="parte-container" class="parte-container">' +
                 '<div class="btn btn-app btn-xs btn-warning parte-btn" id="parte-btn">' +
-                    '<i class="fa fa-cog bigger-130"></i>' +
                  '</div>' +
                  '<div  id="parte-box" class="parte-box clearfix" >' +
                     '<div id="parte-items" class="pull-left width-50"></div>' +
@@ -14,12 +13,10 @@
 
     var index = 0;
     $.fn.parte = function (options) {
-        debugger
         var settings = $.extend({
-            // These are the defaults.
-            saveOriginalData: true,
-            backgroundColor: "white",
-            top:'20px'
+            top: '20px',
+            onChange: function (element, checked) { },
+            htmlicon: '<i class="fa fa-cog bigger-130"></i>'
         }, options);
 
         if (this.length && !$('#parte-container').length) {
@@ -27,6 +24,8 @@
         }
 
         $('#parte-container').css('top', settings.top);
+
+        $('#parte-btn').html(settings.htmlicon);
 
         $('#parte-btn').click(function () {
             if ($('#parte-box').length) {
@@ -38,7 +37,7 @@
 
         });
 
-        var elements = this.each(function (i, e) {
+        var elements = this.each(function (i, element) {
             var item = $(itemTemplate);
             var label = $(itemTemplateLabel);
             var checkbox = $(itemTemplateCheckBox);
@@ -46,31 +45,26 @@
             $(item).append(checkbox);
             $(item).append(label);
 
-
             $("#parte-container #parte-items").append(item);
 
             //set label name
-            if (e.getAttribute('data-parte-name')) {
-                label.html(e.getAttribute('data-parte-name'));
+            if (element.getAttribute('data-partename')) {
+                label.html(" "+element.getAttribute('data-partename'));
             } else {
-                label.html('parte-label' + index);
-            }
-
-            //save data if saveOriginalData is true
-            if (settings.saveOriginalData) {
-                e.setAttribute("data-parte-value", e.value);
+                label.html(" " + 'parte-label' + index);
             }
 
             //set checkbox id, label for and related element id
             label.attr('for', 'parte-checkbox' + index);
             checkbox.attr('id', 'parte-checkbox' + index);
-                       $(checkbox).change(function () {
+            $(checkbox).change(function () {
                 var cb = this;
                 if (cb.checked) {
-                    $(e).hide();
+                    $(element).hide();
                 } else {
-                    $(e).show();
+                    $(element).show();
                 }
+                settings.onChange(element, cb.checked);
             });
 
             index++;
@@ -80,11 +74,12 @@
     };
 
 
-    $.fn.parte.update = function (options) {
+   /* $.fn.parte.update = function (options) {
         var settings = $.extend({
             // These are the defaults.
             color: "#556b2f",
-            backgroundColor: "white"
+            backgroundColor: "white",
+            onChange: function (element, checked) { }
         }, options);
 
         return this.each(function () {
@@ -92,6 +87,6 @@
         });
 
         return this;
-    };
+    };*/
 
 }(jQuery));
