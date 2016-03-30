@@ -19,7 +19,7 @@
 
     <form class="form-horizontal">
 
-        <div class="form-group has-success parte" data-partename="user name">
+        <div class="form-group has-success parte" data-partename="User Name">
 
             <label class="col-xs-2 control-label" for="inputSuccess">Username</label>
 
@@ -33,7 +33,7 @@
 
         </div>
 
-        <div class="form-group has-warning parte" data-partename="user Password">
+        <div class="form-group has-warning parte" data-partename="User Password">
 
             <label class="col-xs-2 control-label" for="inputWarning">Password</label>
 
@@ -47,13 +47,13 @@
 
         </div>
 
-        <div class="form-group has-error parte" data-partename="user Email">
+        <div class="form-group has-error parte" data-partename="User Email">
 
             <label class="col-xs-2 control-label" for="inputError">Email</label>
 
             <div class="col-xs-10">
 
-                <input type="email" id="inputError" class="form-control" placeholder="Input with error">
+                <input type="email" id="inputError" class="form-control" placeholder="Input with error" value="Test@test.com">
 
                 <span class="help-block">Please enter a valid email address</span>
 
@@ -69,7 +69,12 @@
             $(".parte").parte({
                 backgroundColor: "white",
                 top: '20px',
-                onChange: function (element, checked) { },
+                onChange: function (element, checked) {
+                    if(checked)
+                    {
+                        $(element).find('input').each(function () { this.value=""});
+                    }
+                },
                 htmlicon: '<i class="fa fa-cog bigger-130"></i>'
             });
         });
